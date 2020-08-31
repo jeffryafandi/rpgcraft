@@ -11,7 +11,6 @@ class McClient extends Client {
     
     
   }
-//Bro config.json gua ngelag :v
 }
 
 module.exports = McClient
