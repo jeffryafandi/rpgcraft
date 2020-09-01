@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const PlayerSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   id: String,
-  name: String,
+  nickname: String,
   gender: String,
   skin: String,
   rank: String,

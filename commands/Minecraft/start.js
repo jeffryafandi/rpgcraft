@@ -1,8 +1,15 @@
 
 const Discord = require('discord.js')
+const players = require ('../../models/player.js')
+const mongoose = require ('mongoose')
 
 module.exports.run = async (client,msg,args) => {
  
+  const pl = await players.findOne({
+    id: msg.author.id
+  })
+  
+  
   //Var
   var mCancel = `You canceled the command`
   var tErr = `Time has run out, please repeat the command again!`
@@ -179,7 +186,19 @@ const jk = new Discord.MessageEmbed()
       return msg.channel.send(`${tag}, ${mCancel}`).then(i => i.delete({timeout:10000}))
 ///return true
     } else if(yu === "yes") {
-      data.push("male")
+    
+      if(!pl) {
+        const ply = await players.create({
+         id: msg.author.id,
+        nickname: data[0],
+          gender: data[1],
+          character: data[2]
+          
+        })
+      }
+      
+      
+      
     msg.channel.send(`All setups have been successful, you can start the adventure from now on!`).then(w => w.delete({timeout:5000}))
    //   return true
     } else {
