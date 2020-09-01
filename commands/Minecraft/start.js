@@ -35,8 +35,8 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   .addField(`Input`, `Enter gender! \`Male or Female\``)
   .setFooter(`Adventure Setup 2 / 3 | Type cancel to cancel the action`)
   
-  const lkk = await emb1.edit(jk)
-  
+  const lkk = await msg.channel.send(jk)
+  emb1.delete()
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time']}).then(res => {
     
     msg.delete()
@@ -52,8 +52,8 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase()) {
       lkk.delete()
-      msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
-      return;
+     return msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
+      
     }
             
   }).catch(err => {
@@ -69,7 +69,8 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   .addField(`Input`, `Enter character! \`Steve or Alex\``)
   .setFooter(`Adventure Setup 3 / 3 | Type cancel to cancel the action`)
   
-  const io = await lkk.edit(kl)
+  const io = await msg.channel.send(kl)
+  lkk.delete()
   
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time'] }).then(res => {
     msg.delete()
@@ -84,7 +85,9 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       data.push("alex")
       msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Alex\`)`).then(w => w.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase()) {
-      msg.channel.send(`**${msg.author.tag}**, Character is not valid!`).then(q => q.delete({timeout:5000}))
+      io.delete()
+    return msg.channel.send(`**${msg.author.tag}**, Character is not valid!`).then(q => q.delete({timeout:5000}))
+      
     } 
     
    /* msg.channel.send(`Nickname: ${data[0]}
@@ -110,6 +113,7 @@ Character: ${data[2]}`)*/
   const yt = await msg.channel.send(jio)
   
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000 , errors:['time'] }).then(res => {
+    msg.delete()
     if(res.first().content.toLowerCase() === "no") {
       yt.delete()
       msg.reply(`Setup canceled!`).then(i => i.delete({timeout:5000}))
@@ -119,6 +123,7 @@ Character: ${data[2]}`)*/
     } else if(res.first().content.toLowerCase()) {
       yt.delete()
       msg.reply(`Input not valid!, Setup canceled`).then(j => j.delete({timeout:5000}))
+      return
     }
   }).catch(err => {
     console.log(err)
