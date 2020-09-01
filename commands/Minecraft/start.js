@@ -18,12 +18,8 @@ module.exports.run = async (client,msg,args) => {
   
   const filter2 = m => {
    if(m.author.bot) return
-    if(m.author.id === msg.author.id && m.content === "male", "cancel", "female" ) return true
-    else {
-      msg.delete()
-     m.channel.send(`${tag}, Gender is not valid!`)
-      return false
-    }
+    if(m.author.id === msg.author.id) return true
+    
     
   }
   
@@ -80,27 +76,38 @@ const jk = new Discord.MessageEmbed()
   
   await msg.channel.awaitMessages(filter2, wkt).then(res => {
     let rt = res.first().content.toLowerCase()
+  
+    
+    
     
     if(rt === "cancel") {
       lkk.delete()
-      return msg.channel.send(`${tag}, You have canceled the setup, you can start it any time!`).then(i => i.delete({timeout:10000}))
+      msg.channel.send(`${tag}, You have canceled the setup, you can start it any time!`).then(i => i.delete({timeout:10000}))
+      return true
     } else if(rt === "male") {
       data.push("male")
-    return  msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Male\`)`).then(w => w.delete({timeout:5000}))
+    msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Male\`)`).then(w => w.delete({timeout:5000}))
+      return true
     } else if(rt === "female") {
       data.push("female")
-     return msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
+     msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
+      return true
     } else {
       lkk.delete()
-      return msg.channel.send(`Gender not valid`)
+      msg.channel.send(`Gender not valid`)
+      return false
     }
     
     
     
+    
+ 
   }).catch(err => {
     console.log(err)
     return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
   })
+  
+
   
   
   
