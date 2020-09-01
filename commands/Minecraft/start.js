@@ -6,7 +6,7 @@ module.exports.run = async (client,msg,args) => {
   
   const embee = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
-  .setAuthor(`${client.user.username} Adventure`, client.user.displayAvatarURL())
+  .setAuthor(`${client.user.username} Adventure | Nickname`, client.user.displayAvatarURL())
   .setDescription(`**${msg.author.tag}** Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
   .addField(`Input`, `Enter a nickname to continue`)
   .setFooter(`Adventure Setup 1 / 3 | Type cancel to cancel the action!`)
@@ -30,9 +30,9 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
 
   const jk = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
-  .setAuthor(`${client.user.username} Adventure`, client.user.avatarURL())
+  .setAuthor(`${client.user.username} Adventure | Gender`, client.user.avatarURL())
   . setDescription (`**${msg.author.tag}** Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
-  .addField(`Input`, `Enter gender \`male or female\``)
+  .addField(`Input`, `Enter gender! \`Male or Female\``)
   .setFooter(`Adventure Setup 2 / 3 | Type cancel to cancel the action`)
   
   const lkk = await emb1.edit(jk)
@@ -46,10 +46,10 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it any time!`).then(i => i.delete({timeout:10000}))
     } else if(res.first().content.toLowerCase() === "male") {
       data.push("male")
-      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`male\`)`).then(w => w.delete({timeout:5000}))
+      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Male\`)`).then(w => w.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase() === "female") {
       data.push("female")
-      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`female\`)`).then(m => m.delete({timeout:5000}))
+      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase()) {
       lkk.delete()
       msg.channel.send(`**${msg.author.tag}**, Your gender is not valid!`).then(w => w.delete({timeout:5000}))
@@ -64,8 +64,30 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   
   const kl = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
-  .setAuthor(`${client.user.username} Adventure`)
-  .setDescription(`**${msg.author.tag}**, 
+  .setAuthor(`${client.user.username} Adventure | Character`)
+  .setDescription(`**${msg.author.tag}**, Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
+  .addField(`Input`, `Enter character! \`Steve or Alex\``)
+  .setFooter(`Adventure Setup 3 / 3 | Type cancel to cancel the action`)
+  
+  const io = await lkk.edit(kl)
+  
+  await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time'] }).then(res => {
+    msg.delete()
+    
+    if(res.first().content.toLowerCase() === "cancel") {
+      io.delete()
+      return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it any time!`).then(p => p.delete({timeout:10000}))
+    } else if(res.first().content.toLowerCase() === "steve") {
+      data.push("steve")
+      msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Steve\`)`).then(o => o.delete({timeout:5000}))
+    } else if(res.first().content.toLowerCase() === "alex") {
+      data.push("alex")
+      msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Alex\`)`).then(w => w.delete({timeout:5000}))
+    }//:v :v :v :v :v 
+    
+    
+  })
+  
 
   }
                                                                    
