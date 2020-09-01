@@ -11,7 +11,7 @@ module.exports.run = async (client,msg,args) => {
 const emb1 = await msg.channel.send(embee)
 const filter = m => {
 m.author.id === msg.author.id
-}
+};
 
 const res = await msg.channel.awaitMessages(filter, { time: 20000, max: 1, errors:['time'] })
 if(res) {
