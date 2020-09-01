@@ -11,7 +11,9 @@ module.exports.run = async (client,msg,args) => {
   .addField(`Input`, `Enter a nickname to continue`)
   .setFooter(`Adventure Setup 1 / 3 | Type cancel to cancel the action!`)
 const emb1 = await msg.channel.send(embee)
-const filter = m => m.author.id === msg.author.id
+const filter = m => {
+m.author.id === msg.author.id
+}
 
 msg.delete()
 
@@ -37,7 +39,12 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   emb1.delete()
   const lkk = await msg.channel.send(jk)
   try {
-  await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time']}).then((res) => {
+    
+    const filter1 = m => {
+      m.author.id === msg.author.id && m.content.toLowerCase() === "male" && m.content.toL
+    }
+    
+  await msg.channel.awaitMessages(filter1, { max: 1, time: 20000, errors:['time']}).then((res) => {
     
     msg.delete()
     
@@ -52,10 +59,10 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
     } else if(res.first().content.toLowerCase() === "female") {
       data.push("female")
      return msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
-    } else if(res.first.content.toLowerCase === msg.content.split(" ")){  
+    } else  
       lkk.delete()
     return msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
-    }
+    
     
             
   })
