@@ -11,6 +11,7 @@ module.exports.run = async (client,msg,args) => {
 const emb1 = await msg.channel.send(embee)
 const filter = m => m.author.id === msg.author.id
 
+msg.delete()
 
 await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time'] }).then(res => {
 if(res.first().content.toLowerCase() === "cancel") {
@@ -29,10 +30,22 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   
   const lkk = await emb1.edit(jk)
   
-}
+  await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time']}).then(res => {
+    if(res.first().content.toLowerCase() === "cancel") {
+      lkk.delete()
+      return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it any time!`).then(i => i.delete({timeout:10000}))
+    } else if(res.first().content.toLowerCase() === "male") {
+      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`male\`)`).then(w => w.delete({timeout:5000}))
+    } else if(res.first().content.toLowerCase() === "female") {
+      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`female\`)`).then(m => m.delete({timeout:5000}))
+    } hola
+  }) 
+    
+  }
+                                                                   
 
 module.exports.help = {
   name: "start",
-  aliases: []
+  aliases: ["join"]
   
 }
