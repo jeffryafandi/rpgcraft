@@ -8,9 +8,8 @@ class McClient extends Client {
     
     
     this.config = require ('../config.json')
-    
-    
+    this.mongoose = require("../database.js")  
+    this.mongoose.init()
   }
 }
-
 module.exports = McClient

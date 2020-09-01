@@ -4,7 +4,7 @@ const { Collection } = require ('discord.js')
 
 const Helps = new Collection ()
 const Aliases = new Collection ()
-const Commmands = new Collection ()
+const Commands = new Collection ()
 
 
 const module = fs.readdirSync('../commands').filter(x => 
@@ -27,9 +27,19 @@ for(const mod of module) {
   for(const file of cmdFiles) {
     file = file.substr(0, file.length - 3)
     
-  }
+    file = require (`../commands/${mod}/${file}`)
+    Commands.set(file.help.name.toLowerCase(), file)
+    Helps.get(module.toLowerCase().cmds.push(file.help.name))
+    
+    
+    for(const al of file.help.aliases) {
+      Aliases.set(al.toLowerCase(), file.help.name)
+    }
+  }  
+}
 
-  
-  
-  
-}//Conect mongo ??? yes lu atur database
+console.log(`[Info] ${Commands.size} Commands Loaded...`)
+console.log(`[Info] ${module.length} Module Loaded`)
+
+
+module.exports.commmands =✓

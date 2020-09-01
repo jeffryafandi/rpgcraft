@@ -5,8 +5,7 @@ const client = new McClient({
 })
 
 require ('./src/structures/events')(client)
-
-
+//pindah ke tempat gw
 client.login(client.config.env.TOKEN)
 //luu atur config ny token kek prefix kekok ok
 
