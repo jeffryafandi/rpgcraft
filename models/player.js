@@ -21,7 +21,8 @@ const PlayerSchema = mongoose.Schema({
   coal: Number,
   diamondore: Number,
   diamond: Number,
-  
+  obsidian: Number,
+  netherite: Number,
   coal: Number,
   emerald: Number
 });

@@ -25,7 +25,7 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
 }).catch(err => {
   console.log(err)
   emb1.delete()
-  return msg.reply(`Time has run out, please repeat the command again!`).then(p => p.delete({timeout:5000}))
+  return msg.reply(`Time has run out, please repeat the command again!`).then(p => p.delete({timeout:10000}))
 })
 
   const jk = new Discord.MessageEmbed()
@@ -59,7 +59,7 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   }).catch(err => {
     console.log(err)
     lkk.delete()
-    return msg.reply(`Time has run out, please repeat the command again!`).then(o => o.delete({timeout:5000}))
+    return msg.reply(`Time has run out, please repeat the command again!`).then(o => o.delete({timeout:10000}))
   })
   
   const kl = new Discord.MessageEmbed()
@@ -94,20 +94,20 @@ Character: ${data[2]}`)*/
     
   }).catch(err => {
     console.log(err)
-    return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:5000}))
+    return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
   })
   
   const jio = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`Adventure setup complete`, client.user.avatarURL())
   .setDescription(`All setup has been completed, please confirm!`)
-  .addField(`Your data`, `- Nickname: \`${data[0].toProperCase()}\`
-- Gender: \`${data[1].toProperCase()}\`
-- Character: \`${data[2].toProperCase()}\``)
+  .addField(`Your data`, `- Nickname: \`${data[0]}\`
+- Gender: \`${data[1]}\`
+- Character: \`${data[2]}\``)
   .addField(`Input`, `To confirm, type \`Yes\` and To cancel, type \`No\``)
   .setFooter(`${client.user.tag} Adventure`)
-  
-  const yt = await io.edit(jio)
+  io.delete()
+  const yt = await msg.channel.send(jio)
   
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000 , errors:['time'] }).then(res => {
     if(res.first().content.toLowerCase() === "no") {
@@ -118,10 +118,17 @@ Character: ${data[2]}`)*/
       msg.reply(`All setups have been successful, you can start the adventure from now on!`).then(r => r.delete({timeout:10000}))
     } else if(res.first().content.toLowerCase()) {
       yt.delete()
-      msg.reply(`Input not valid!, Setup canceled`).then(j => j.delete({timeout:
+      msg.reply(`Input not valid!, Setup canceled`).then(j => j.delete({timeout:5000}))
     }
+  }).catch(err => {
+    console.log(err)
+    yt.delete()
+    return msg.reply(`Time has run out, please repeat the command again!`).then(q => q.delete({timeout:10000}))
   })
+  
+
   }
+
                                                                    
 
 module.exports.help = {
