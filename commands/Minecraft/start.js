@@ -18,10 +18,10 @@ module.exports.run = async (client,msg,args) => {
   
   const filter2 = m => {
    if(m.author.bot) return
-    if(m.author.id === msg.author.id && m.content === "male" && m.content.toLowerCase() === "female" && m.content.toLowerCase() === "cancel") return true
+    if(m.author.id === msg.author.id && m.content === "male", "cancel", "female" ) return true
     else {
       msg.delete()
-     msg.channel.send(`${tag}, Gender is not valid!`)
+     m.channel.send(`${tag}, Gender is not valid!`)
       return false
     }
     
@@ -90,6 +90,9 @@ const jk = new Discord.MessageEmbed()
     } else if(rt === "female") {
       data.push("female")
      return msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
+    } else {
+      lkk.delete()
+      return msg.channel.send(`Gender not valid`)
     }
     
     
