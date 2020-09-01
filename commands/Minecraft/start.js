@@ -52,7 +52,7 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase()) {
       lkk.delete()
-      msg.channel.send(`**${msg.author.tag}**, Your gender is not valid!`).then(w => w.delete({timeout:5000}))
+      msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
       return;
     }
             
@@ -83,10 +83,25 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
     } else if(res.first().content.toLowerCase() === "alex") {
       data.push("alex")
       msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Alex\`)`).then(w => w.delete({timeout:5000}))
-    }//:v :v :v :v :v 
+    } else if(res.first().content.toLowerCase()) {
+      msg.channel.send(`**${msg.author.tag}**, Character is not valid!`).then(q => q.delete({timeout:5000}))
+    } 
+    
+   /* msg.channel.send(`Nickname: ${data[0]}
+Gender: ${data[1]}
+Character: ${data[2]}`)*/
     
     
+  }).catch(err => {
+    console.log(err)
+    return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:5000}))
   })
+  
+  const jio = new Discord.MessageEmbed()
+  .setColor(client.config.COLOR.RANDOM)
+  .setAuthor(`Adventure setup complete`, client.user.avatarURL())
+  .setDescription(`All setup has been completed, please confirm!`)
+  .addField(`Your data`, `- Nickname: \`${data[0].to
   
 
   }
