@@ -7,7 +7,7 @@ module.exports.run = async (client,msg,args) => {
   .setAuthor(`${client.user.username} Adventure`, client.user.displayAvatarURL())
   .setDescription(`**${msg.author.tag}** Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
   .addField(`Input`, `Enter a nickname to continue`)
-  .setFooter(`Adventure Setup 1 / 3 | `)
+  .setFooter(`Adventure Setup 1 / 3 | Type cancel to cancel the action!`)
 const emb1 = await msg.channel.send(embee)
 const filter = m => m.author.id === msg.author.id
 
@@ -22,7 +22,12 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
 
   const jk = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
-  .setAuthor(`${client.user
+  .setAuthor(`${client.user.username} Adventure`, client.user.avatarURL())
+  . setDescription (`**${msg.author.tag}** Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
+  .addField(`Input`, `Enter gender \`male or female\``)
+  .setFooter(`Adventure Setup 2 / 3 | Type cancel to cancel the action`)
+  
+  const lkk = await emb1.edit(jk)
   
 }
 
