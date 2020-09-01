@@ -7,18 +7,23 @@ module.exports.run = async (client,msg,args) => {
   .setAuthor(`${client.user.username} Adventure`, client.user.displayAvatarURL())
   .setDescription(`**${msg.author.tag}** Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
   .addField(`Input`, `Enter a nickname to continue`)
-  .setFooter(`Adventure Setup 1 / 3`)
+  .setFooter(`Adventure Setup 1 / 3 | `)
 const emb1 = await msg.channel.send(embee)
-const filter = m => {
-m.author.id === msg.author.id
-};
+const filter = m => m.author.id === msg.author.id
 
-const res = await msg.channel.awaitMessages(filter, { time: 20000, max: 1, errors:['time'] })
-if(res) {
-  msg.channel.send(res.first().content)
+
+await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time'] }).then(res => {
+if(res.first().content.toLowerCase() === "cancel") {
+  emb1.delete()
+  return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it at any time!`).then(l => l.delete({timeout:10000}))
 }
+msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the database! (\`${res.first().content}\`)`).then(l => l.delete({timeout:5000}))
+})
 
-
+  const jk = new Discord.MessageEmbed()
+  .setColor(client.config.COLOR.RANDOM)
+  .setAuthor(`${client.user
+  
 }
 
 module.exports.help = {
