@@ -36,7 +36,7 @@ module.exports.run = async (client,msg,args) => {
   //
   
   /* Await Nickname */
-  try {
+  
   const embee = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`${client.user.username} Adventure | Nickname`, client.user.displayAvatarURL())
@@ -44,7 +44,7 @@ module.exports.run = async (client,msg,args) => {
   .addField(`Input`, `Enter a nickname to continue`)
   .setFooter(`Adventure Setup 1 / 3 | Type cancel to cancel the action!`)
 const emb1 = await msg.channel.send(embee)
-
+try {
 const ress = await msg.channel.awaitMessages(filter, wkt)
   let kj = ress.first().content.toLowerCase()
   
@@ -60,9 +60,15 @@ const ress = await msg.channel.awaitMessages(filter, wkt)
     return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
   })*/
   
+} catch(err)  {
+  emb1.delete()
+    console.log(err)
+    return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
+  }
   /* End Nickname */
   
   
+    
   /* Await Gender */
   
 const jk = new Discord.MessageEmbed()
@@ -73,7 +79,7 @@ const jk = new Discord.MessageEmbed()
   .setFooter(`Adventure Setup 2 / 3 | Type cancel to cancel the action`)
   emb1.delete()
   const lkk = await msg.channel.send(jk)
-  
+  try {
   const res = await msg.channel.awaitMessages(filter2, wkt)
     let rt = res.first().content.toLowerCase()
   
@@ -98,6 +104,12 @@ const jk = new Discord.MessageEmbed()
       return
     }
     
+} catch(err)  {
+  lkk.delete()
+    console.log(err)
+    return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
+  }
+    
    
     const kl = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
@@ -108,16 +120,79 @@ const jk = new Discord.MessageEmbed()
   lkk.delete()
   const io = await msg.channel.send(kl)
     
+    try {
+      const res2 = await msg.channel.awaitMessages(filter2, wkt)
+    let piy = res2.first().content.toLowerCase()
+  
     
     
     
+    if(piy === "cancel") {
+      io.delete()
+      return msg.channel.send(`${tag}, ${mCancel}`).then(i => i.delete({timeout:10000}))
+///return true
+    } else if(piy === "steve") {
+      data.push("steve")
+    msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Steve\`)`).then(w => w.delete({timeout:5000}))
+   //   return true
+    } else if(piy === "alex") {
+      data.push("alex")
+     msg.channel.send(`${tag}, Your gender has been stored in the database! (\`Alex\`)`).then(m => m.delete({timeout:5000}))
+      
+    } else {
+      io.delete()
+      msg.channel.send(`${tag}, Character not valid!`).then(g => g.delete({timeout:5000}))
+      return
+    }
+    
+      
+      
  
 } catch(err)  {
+  io.delete()
     console.log(err)
     return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
   }
   
   
+  const jio = new Discord.MessageEmbed()
+  .setColor(client.config.COLOR.RANDOM)
+  .setAuthor(`Adventure setup complete`, client.user.avatarURL())
+  .setDescription(`All setup has been completed, please confirm!`)
+  .addField(`Your data`, `- Nickname: \`${data[0]}\`
+- Gender: \`${data[1]}\`
+- Character: \`${data[2]}\``)
+  .addField(`Input`, `To confirm, type \`Yes\` and To cancel, type \`No\``)
+  .setFooter(`${client.user.tag} Adventure`)
+  io.delete()
+  const yt = await msg.channel.send(jio)
+  try {
+    
+      const res3 = await msg.channel.awaitMessages(filter2, wkt)
+    let yu = res3.first().content.toLowerCase()
+  
+    
+    
+    
+    if(yu === "no") {
+      lkk.delete()
+      return msg.channel.send(`${tag}, ${mCancel}`).then(i => i.delete({timeout:10000}))
+///return true
+    } else if(yu === "yes") {
+      data.push("male")
+    msg.channel.send(`All setups have been successful, you can start the adventure from now on!`).then(w => w.delete({timeout:5000}))
+   //   return true
+    } else {
+      lkk.delete()
+      msg.channel.send(`${tag}, Input not valid!, canceled setup!`).then(g => g.delete({timeout:5000}))
+      return
+    }
+    
+    
+} catch(err)  {
+    console.log(err)
+    return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
+}
   
   
   
