@@ -1,3 +1,4 @@
+
 const Discord = require('discord.js')
 
 module.exports.run = async (client,msg,args) => {
@@ -11,17 +12,23 @@ module.exports.run = async (client,msg,args) => {
   
   //Filter
   const filter = m => {
-   m.author.id === msg.author.id 
+    if(m.author.id === msg.author.id) return true
   }
   
+  const wkt = {
+    max: 1,
+    time: 30000,
+    errors:['time'] 
+  }
+      
   
-        
+  let data = []
   
   
   //
   
   /* Await Nickname */
-  try {
+  
   const embee = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`${client.user.username} Adventure | Nickname`, client.user.displayAvatarURL())
@@ -38,17 +45,16 @@ await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time'] }
     emb1.delete()
     return msg.channel.send(mCancel).then(k => k.delete({timeout:10000}))
   }
-  
-  msg.channel.send(`${tag}, Your nickname has been stored in the database! (\`${kj}\`)`).then(l => l.delete({timeout:10000}))
-  
+  data.push(kj)
+  msg.channel.send(`${tag}, Your nickname has been stored in the database! (\`${kj}\`)`).then(l => l.delete({timeout:5000}))
 })
-  } catch (err) {
-    console.log(err)
-  }
-  
-  
   /* End Nickname */
+
+  /* Await Gender */
+  
+  /*Emd
 }
+
 
 module.exports.help = {
   name: "start",
