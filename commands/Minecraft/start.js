@@ -34,9 +34,9 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   . setDescription (`**${msg.author.tag}** Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
   .addField(`Input`, `Enter gender! \`Male or Female\``)
   .setFooter(`Adventure Setup 2 / 3 | Type cancel to cancel the action`)
-  
-  const lkk = await msg.channel.send(jk)
   emb1.delete()
+  const lkk = await msg.channel.send(jk)
+  
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time']}).then(res => {
     
     msg.delete()
@@ -50,7 +50,8 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
     } else if(res.first().content.toLowerCase() === "female") {
       data.push("female")
       msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
-    } else if(res.first().content.toLowerCase()) {
+    } else {
+    
       lkk.delete()
      return msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
       
@@ -68,9 +69,8 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   .setDescription(`**${msg.author.tag}**, Welcome to adventure ${client.user.username}. To get started, please use the instructions provided below`)
   .addField(`Input`, `Enter character! \`Steve or Alex\``)
   .setFooter(`Adventure Setup 3 / 3 | Type cancel to cancel the action`)
-  
-  const io = await msg.channel.send(kl)
   lkk.delete()
+  const io = await msg.channel.send(kl)
   
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time'] }).then(res => {
     msg.delete()
@@ -84,10 +84,9 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
     } else if(res.first().content.toLowerCase() === "alex") {
       data.push("alex")
       msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Alex\`)`).then(w => w.delete({timeout:5000}))
-    } else if(res.first().content.toLowerCase()) {
+    } else /*if(res.first().content.toLowerCase()) */{
       io.delete()
     return msg.channel.send(`**${msg.author.tag}**, Character is not valid!`).then(q => q.delete({timeout:5000}))
-      
     } 
     
    /* msg.channel.send(`Nickname: ${data[0]}
