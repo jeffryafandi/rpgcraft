@@ -4,7 +4,7 @@ module.exports = client => {
         client.user.setPresence({
             status: 'dnd',
             activity: {
-                name: 'm!help  | v0.0.1',
+                name: `Beta Version`,
                 type: 'STREAMING',
                 url: '-'
             }

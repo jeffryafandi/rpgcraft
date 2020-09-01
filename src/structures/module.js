@@ -27,6 +27,9 @@ for(const mod of modules) {
     file = file.substr(0, file.length - 3)
     
     file = require (`../commands/${mod}/${file}`)
+    file.help.module = mdConf
+    file.help.path = `./commands/${mod}/${file}`
+    
     Commands.set(file.help.name.toLowerCase(), file)
     Helps.get(module.toLowerCase().cmds.push(file.help.name))
     
