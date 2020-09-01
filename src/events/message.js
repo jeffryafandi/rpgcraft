@@ -22,5 +22,5 @@ module.exports = async (client, msg) => {
       }
     );
   if(msg.author.bot || !msg.guild) return;
-  if(msg.content.startsWith(client.config.PREFIX) || msg.content.startsWith(`${client.user.toString()} `)) return require ('./structures/command')(client, msg)
+  if(msg.content.startsWith(client.config.PREFIX) || msg.content.startsWith(`${client.user.toString()} `)) return require ('../structures/command')(client, msg)
 }

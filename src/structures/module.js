@@ -33,7 +33,7 @@ for(const mod of modules) {
     file.help.path = `./commands/${mod}/${file}`
     
     Commands.set(file.help.name.toLowerCase(), file)
-    Helps.get(mod.toLowerCase().cmds.push(file.help.name))
+    Helps.get(mod.toLowerCase()).cmds.push(file.help.name)
     
     
     for(const al of file.help.aliases) {
