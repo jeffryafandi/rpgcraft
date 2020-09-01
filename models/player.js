@@ -8,7 +8,8 @@ const PlayerSchema = mongoose.Schema({
   level: Number,
   head: Number,
   body: Number,
-  
+  pants: Number,
+  boots: Number,
   emerald: String,
 });
 
