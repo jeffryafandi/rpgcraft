@@ -5,7 +5,7 @@ module.exports = client => {
             status: 'dnd',
             activity: {
                 name: `Beta Version`,
-                type: 'STREAMING',
+                type: 'WATCHING',
                 url: '-'
             }
         });

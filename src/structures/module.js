@@ -14,7 +14,9 @@ for(const mod of modules) {
   
   const mdConf = require(`../../commands/${mod}/mdl.json`)
   
-  mdConf.path = `../commands/${mod}`;
+  mdConf.path = `./commands/${mod}`
+                         
+                      
   mdConf.cmds = []
   Helps.set(mod.toLowerCase(), mdConf)
   
@@ -23,15 +25,15 @@ for(const mod of modules) {
     .filter(x => !fs.statSync(path.resolve("./commands/", mod, x)).isDirectory())
     .filter(x => x.endsWith(".js"));
   
-  for(const file of cmdFiles) {
+  for(let file of cmdFiles) {
     file = file.substr(0, file.length - 3)
     
-    file = require (`../commands/${mod}/${file}`)
+    file = require (`../../commands/${mod}/${file}`)
     file.help.module = mdConf
     file.help.path = `./commands/${mod}/${file}`
     
     Commands.set(file.help.name.toLowerCase(), file)
-    Helps.get(module.toLowerCase().cmds.push(file.help.name))
+    Helps.get(mod.toLowerCase().cmds.push(file.help.name))
     
     
     for(const al of file.help.aliases) {
