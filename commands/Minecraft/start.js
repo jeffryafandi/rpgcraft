@@ -18,7 +18,6 @@ if(res.first().content.toLowerCase() === "cancel") {
   emb1.delete()
   return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it at any time!`).then(l => l.delete({timeout:10000}))
 }
-  msg.delete()
 msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the database! (\`${res.first().content}\`)`).then(l => l.delete({timeout:5000}))
 })
 
@@ -48,7 +47,10 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       return;
     }
             
-  }) 
+  }).catch(err => {
+    console.log(err)
+    return msg.channel.send(`Time has passed 
+  })
 
   }
                                                                    
