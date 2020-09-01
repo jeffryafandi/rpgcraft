@@ -53,8 +53,8 @@ const ress = await msg.channel.awaitMessages(filter, wkt)
     emb1.delete()
     return msg.channel.send(`${tag}, ${mCancel}`).then(k => k.delete({timeout:10000}))
   }
-  data.push(kj)
-  msg.channel.send(`${tag}, Your nickname has been stored in the database! (\`${kj}\`)`).then(l => l.delete({timeout:5000}))
+  data.push(ress.first().content)
+  msg.channel.send(`${tag}, Your nickname has been stored in the database! (\`${ress.first().content}\`)`).then(l => l.delete({timeout:5000}))
 /*catch(err => {
     console.log(err)
     return msg.reply(`Time has run out, please repeat the command again!`).then(e => e.delete({timeout:10000}))
