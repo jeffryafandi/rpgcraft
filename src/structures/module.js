@@ -38,7 +38,7 @@ for(const mod of modules) {
 }
 
 console.log(`[Info] ${Commands.size} Commands Loaded...`)
-console.log(`[Info] ${module.length} Module Loaded`)
+console.log(`[Info] ${modules.length} Module Loaded`)
 
 
 module.exports.commmands = Commands
