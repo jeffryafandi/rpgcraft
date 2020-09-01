@@ -46,6 +46,6 @@ console.log(`[Info] ${Commands.size} Commands Loaded...`)
 console.log(`[Info] ${modules.length} Module Loaded`)
 
 
-module.exports.commmands = Commands
+module.exports.commands = Commands
 module.exports.aliases = Aliases
 module.exports.helps = Helps

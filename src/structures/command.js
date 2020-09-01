@@ -14,7 +14,7 @@
           const newGuild = new Guild({
             _id: mongoose.Types.ObjectId(),
             guildID: msg.guild.id,
-            prefix: client.config.PREFIX
+            prefix: "mc!"
           });
 
           newGuild
@@ -24,11 +24,20 @@
         }
       } 
     );
-  const pref = client.config.PREFIX
+  const pref = guild.prefix
   
   const PREFIX = msg.content.startsWith(pref) ? pref: `${client.user.toString()} `
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g)
-  const cmd = args.shift()
+  const command = args.shift()
+  
+  let cmd;
+  if (client.commands.has(command)) {
+    cmd = client.commands.get(command);
+  }
+  if (client.aliases.has(command)) {
+    cmd = client.commands.get(client.aliases.get(command));
+  }
+  if (!cmd) return undefined;
   
   cmd.run(client, msg, args)
   

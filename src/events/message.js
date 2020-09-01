@@ -11,7 +11,7 @@ module.exports = async (client, msg) => {
           const newGuild = new Guild({
             _id: mongoose.Types.ObjectId(),
             guildID: msg.guild.id,
-            prefix: "m!"
+            prefix: "mc!"
           });
 
           newGuild
