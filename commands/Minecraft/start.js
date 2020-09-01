@@ -2,6 +2,8 @@ const Discord = require ('discord.js')
 
 module.exports.run = async (client,msg,args) => {
   
+  let data = []
+  
   const embee = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`${client.user.username} Adventure`, client.user.displayAvatarURL())
@@ -18,7 +20,12 @@ if(res.first().content.toLowerCase() === "cancel") {
   emb1.delete()
   return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it at any time!`).then(l => l.delete({timeout:10000}))
 }
+  data.push(res.first().content)
 msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the database! (\`${res.first().content}\`)`).then(l => l.delete({timeout:5000}))
+}).catch(err => {
+  console.log(err)
+  emb1.delete()
+  return msg.reply(`Time has run out, please repeat the command again!`).then(p => p.delete({timeout:5000}))
 })
 
   const jk = new Discord.MessageEmbed()
@@ -38,8 +45,10 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       lkk.delete()
       return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it any time!`).then(i => i.delete({timeout:10000}))
     } else if(res.first().content.toLowerCase() === "male") {
+      data.push("male")
       msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`male\`)`).then(w => w.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase() === "female") {
+      data.push("female")
       msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`female\`)`).then(m => m.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase()) {
       lkk.delete()
@@ -49,8 +58,14 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
             
   }).catch(err => {
     console.log(err)
-    return msg.channel.send(`Time has passed 
+    lkk.delete()
+    return msg.reply(`Time has run out, please repeat the command again!`).then(o => o.delete({timeout:5000}))
   })
+  
+  const kl = new Discord.MessageEmbed()
+  .setColor(client.config.COLOR.RANDOM)
+  .setAuthor(`${client.user.username} Adventure`)
+  .setDescription(`**${msg.author.tag}**, 
 
   }
                                                                    
