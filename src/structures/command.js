@@ -14,7 +14,7 @@
           const newGuild = new Guild({
             _id: mongoose.Types.ObjectId(),
             guildID: msg.guild.id,
-            pref: "mc!"
+            prefix: "mc!"
           });
 
           newGuild
@@ -24,7 +24,7 @@
         }
       } 
     );
-  const pref = client.config.PREFIX
+  const pref = guild.prefix
   
   const PREFIX = msg.content.startsWith(pref) ? pref: `${client.user.toString()} `
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g)

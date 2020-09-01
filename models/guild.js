@@ -6,7 +6,7 @@ const guildSchema = mongoose.Schema({
       type: String,
       required: true
     },
-    pref: {
+    prefix: {
       type: String,
       required: true
     }
