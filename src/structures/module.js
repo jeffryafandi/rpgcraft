@@ -6,22 +6,21 @@ const Helps = new Collection ()
 const Aliases = new Collection ()
 const Commands = new Collection ()
 
+const modules = fs.readdirSync('./commands').filter(x => 
+  fs.statSync(path.join("./commands", x)).isDirectory());//taroh mana ? wait
 
-const module = fs.readdirSync('../commands').filter(x => 
-  fs.statSync(path.join("../commands", x)).isDirectory());
 
-
-for(const mod of module) {
+for(const mod of modules) {
   
-  const mdConf = require(`../commands/${mod}/mdl.json`)
+  const mdConf = require(`../../commands/${mod}/mdl.json`)
   
   mdConf.path = `../commands/${mod}`;
   mdConf.cmds = []
-  Helps.set(module.toLowerCase(), mdConf)
+  Helps.set(mod.toLowerCase(), mdConf)
   
   
-  const cmdFiles = fs.readdirSync(path.resolve(`../commands/${mod}`))
-    .filter(x => !fs.statSync(path.esolve("../commands/", mod, x)).isDirectory())
+  const cmdFiles = fs.readdirSync(path.resolve(`./commands/${mod}`))
+    .filter(x => !fs.statSync(path.resolve("./commands/", mod, x)).isDirectory())
     .filter(x => x.endsWith(".js"));
   
   for(const file of cmdFiles) {
@@ -42,4 +41,6 @@ console.log(`[Info] ${Commands.size} Commands Loaded...`)
 console.log(`[Info] ${module.length} Module Loaded`)
 
 
-module.exports.commmands =✓
+module.exports.commmands = Commands
+module.exports.aliases = Aliases
+module.exports.helps = Helps
