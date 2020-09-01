@@ -36,32 +36,34 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
   .setFooter(`Adventure Setup 2 / 3 | Type cancel to cancel the action`)
   emb1.delete()
   const lkk = await msg.channel.send(jk)
-  
+  try {
   await msg.channel.awaitMessages(filter, { max: 1, time: 20000, errors:['time']}).then(res => {
     
     msg.delete()
+    
+    let gender = ["male", "female"]
     
     if(res.first().content.toLowerCase() === "cancel") {
       lkk.delete()
       return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it any time!`).then(i => i.delete({timeout:10000}))
     } else if(res.first().content.toLowerCase() === "male") {
       data.push("male")
-      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Male\`)`).then(w => w.delete({timeout:5000}))
+    return  msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Male\`)`).then(w => w.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase() === "female") {
       data.push("female")
-      msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
+     return msg.channel.send(`**${msg.author.tag}**, Your gender has been stored in the database! (\`Female\`)`).then(m => m.delete({timeout:5000}))
     } else {
-    
       lkk.delete()
-     return msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
-      
+    return msg.channel.send(`**${msg.author.tag}**, Gender is not valid!`).then(w => w.delete({timeout:5000}))
+     
     }
             
-  }).catch(err => {
+  })
+} catch(err) {
     console.log(err)
     lkk.delete()
     return msg.reply(`Time has run out, please repeat the command again!`).then(o => o.delete({timeout:10000}))
-  })
+  } 
   
   const kl = new Discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
@@ -80,10 +82,10 @@ msg.channel.send(`**${msg.author.tag}**, Your nickname has been stored in the da
       return msg.channel.send(`**${msg.author.tag}**, You have canceled the setup, you can start it any time!`).then(p => p.delete({timeout:10000}))
     } else if(res.first().content.toLowerCase() === "steve") {
       data.push("steve")
-      msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Steve\`)`).then(o => o.delete({timeout:5000}))
+      return msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Steve\`)`).then(o => o.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase() === "alex") {
       data.push("alex")
-      msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Alex\`)`).then(w => w.delete({timeout:5000}))
+      return msg.channel.send(`**${msg.author.tag}**, Your character has been stored in the database (\`Alex\`)`).then(w => w.delete({timeout:5000}))
     } else /*if(res.first().content.toLowerCase()) */{
       io.delete()
     return msg.channel.send(`**${msg.author.tag}**, Character is not valid!`).then(q => q.delete({timeout:5000}))
@@ -115,14 +117,14 @@ Character: ${data[2]}`)*/
     msg.delete()
     if(res.first().content.toLowerCase() === "no") {
       yt.delete()
-      msg.reply(`Setup canceled!`).then(i => i.delete({timeout:5000}))
+      return msg.reply(`Setup canceled!`).then(i => i.delete({timeout:5000}))
     } else if(res.first().content.toLowerCase() === "yes") {
       yt.delete()
-      msg.reply(`All setups have been successful, you can start the adventure from now on!`).then(r => r.delete({timeout:10000}))
+      return msg.reply(`All setups have been successful, you can start the adventure from now on!`).then(r => r.delete({timeout:10000}))
     } else if(res.first().content.toLowerCase()) {
       yt.delete()
-      msg.reply(`Input not valid!, Setup canceled`).then(j => j.delete({timeout:5000}))
-      return
+      return msg.reply(`Input not valid!, Setup canceled`).then(j => j.delete({timeout:5000}))
+      
     }
   }).catch(err => {
     console.log(err)
