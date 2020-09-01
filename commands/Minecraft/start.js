@@ -101,9 +101,26 @@ Character: ${data[2]}`)*/
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`Adventure setup complete`, client.user.avatarURL())
   .setDescription(`All setup has been completed, please confirm!`)
-  .addField(`Your data`, `- Nickname: \`${data[0].to
+  .addField(`Your data`, `- Nickname: \`${data[0].toProperCase()}\`
+- Gender: \`${data[1].toProperCase()}\`
+- Character: \`${data[2].toProperCase()}\``)
+  .addField(`Input`, `To confirm, type \`Yes\` and To cancel, type \`No\``)
+  .setFooter(`${client.user.tag} Adventure`)
   
-
+  const yt = await io.edit(jio)
+  
+  await msg.channel.awaitMessages(filter, { max: 1, time: 20000 , errors:['time'] }).then(res => {
+    if(res.first().content.toLowerCase() === "no") {
+      yt.delete()
+      msg.reply(`Setup canceled!`).then(i => i.delete({timeout:5000}))
+    } else if(res.first().content.toLowerCase() === "yes") {
+      yt.delete()
+      msg.reply(`All setups have been successful, you can start the adventure from now on!`).then(r => r.delete({timeout:10000}))
+    } else if(res.first().content.toLowerCase()) {
+      yt.delete()
+      msg.reply(`Input not valid!, Setup canceled`).then(j => j.delete({timeout:
+    }
+  })
   }
                                                                    
 
