@@ -198,6 +198,9 @@ const jk = new Discord.MessageEmbed()
             name: data[0],
             gender: data[1],
             skin: data[2],
+          hp: 20,
+          hunger: 20,
+          area: 1
           
      
           });

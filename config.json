@@ -8,6 +8,10 @@
   "COLOR": {
    "RANDOM": "RANDOM" 
   },
+  "icon":{
+    "hp":"",
+    "hunger":""
+  },
   "start": "Your database has not found, please run `start` to start the game"
   
   

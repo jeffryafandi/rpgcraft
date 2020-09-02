@@ -13,12 +13,18 @@ module.exports.run = async(client, msg, args) => {
         return msg.channel.send(client.config.start)
       }
     });
+  let sword;
+  let axe;
+  let pickaxe;
+  if (db.sword === "1") sword = client.db.icon.sword1
+  if (db.sword === "2") sword = client.db.icon.sword2
   const embed = new discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`${user.username}'s Profile`,user.avatarURL({dynamic: true}))
-  .addField("**INFORMATION**", `\n-Name: ${db.name}\n-Gender: ${db.gender}\n-Character: ${db.character}`)
-  .addField("**STATISTIC**",`${client.config.icon.hp} HP: ${db.hp}/20\n${client.config.icon.`)
-  
+  .addField("**INFORMATION**", `\n-Name: ${db.name}\n-Gender: ${db.gender}\n-Character: ${db.skim}`)
+  .addField("**STATISTIC**",`${client.config.icon.hp}Hp: ${db.hp}/20\n${client.config.icon.hunger}Stamina: ${db.hunger}\n`)
+  .addField("**EQUIPMENT**",`\nSword: ${sword}\nAxe: ${axe}\nPickaxe: ${pickaxe}`)
+  msg.channel.send(embed)
 }
 
 module.exports.help = {
