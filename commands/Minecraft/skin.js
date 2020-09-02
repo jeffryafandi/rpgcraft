@@ -24,9 +24,9 @@ module.exports.run = async (client, msg, args) => {
 
     return new Canvas(543, 337)
       .addImage(image, 0, 0, 543, 337)
-      .addImage(skin.body, 0, 0, 70, 180)
+      .addImage(skin.body, 60, 100,103, 200) //Semangat kaka :v Fucek :v
       .toBufferAsync();
-  }
+  } 
   msg.channel.send({
     files: [{
       attachment: await createCanvas(),
