@@ -194,10 +194,11 @@ const jk = new Discord.MessageEmbed()
       if(!db) {
         const newPlayer = new Player({
             _id: mongoose.Types.ObjectId(),
-            id: msg.author.id, //internasional sue datanya international napa lu huat guild?
+            id: msg.author.id,
             name: data[0],
             gender: data[1],
             skin: data[2],
+          
      
           });
 
@@ -205,34 +206,6 @@ const jk = new Discord.MessageEmbed()
             .save()
             .then(result => console.log(result))
             .catch(err => console.error(err));
-        /*
-        const ply = await Player.create({
-          ac: true,
-         id: msg.author.id,
-  nickname: data[0],
-  gender: data[1],
-  skin: "No Skin",
-  rank: "No",
-  xp: 0,
-  axe: 0,
-  pickaxe: 0,
-  sword: 0,
-  level: 0,
-  head: 0,
-  body: 0,
-  pants: 0,
-  boots: 0,
-  stone: 0,
-  plank: 0,
-  coal: 0,
-  diamond: 0,
-  obsidian: 0,
-  netherite: 0,
-  coal: 0,
-  emerald:0
-  })
-  .save()
-        */
       }
       
       
