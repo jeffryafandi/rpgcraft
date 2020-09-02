@@ -8,6 +8,7 @@ class McClient extends Client {
     this.commands = mdl.commands;
     this.helps = mdl.helps;
     this.aliases = mdl.aliases;
+    this.players = require("../../models/player.js")
     this.snek = require("superagent");
     this.config = require("../../config.json");
     this.mongoose = require("../../database.js");

@@ -31,8 +31,8 @@ module.exports.run = async (client, msg, args) => {
 
   let embed = new discord.MessageEmbed()
     .setAuthor("Chopping tree")
-    .setColor(client.db.COLOR.RANDOM)
-    .setDescription(`You chop the tree with your ${axe}, And got ${random} ${client.db.icon.log}`)
+    .setColor(client.config.COLOR.RANDOM)
+    .setDescription(`You chop the tree with your ${axe}, And got ${random} ${client.config.icon.log}`)
     .setTimestamp()
     .setFooter(client.config.footer)
     msg.channel.send(embed)
