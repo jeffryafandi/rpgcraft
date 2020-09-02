@@ -194,28 +194,11 @@ const jk = new Discord.MessageEmbed()
       if(!db) {
         const newPlayer = new Player({
             _id: mongoose.Types.ObjectId(),
-            id: message.author.id,
-            guild: message.guild.id,
-            blacklist: false,
-            bank: "0",
-            coins: "0",
-            gems: "0",
-            area: "1",
-            unlock: "1",
-            level: "0",
-            mhp: "100",
-            hp: "100",
-            xp: "10",
-            mxp: "320",
-            title: "Just a player",
-            attack: "0",
-            defense: "0",
-            common: "0",
-            uncommon: "0",
-            rare: "0",
-            epic: "0",
-            legend: "0",
-            log: "0"
+            id: msg.author.id, //internasional sue datanya international napa lu huat guild?
+            name: data[0],
+            gender: data[1],
+            skin: data[2],
+     
           });
 
           newPlayer
@@ -249,7 +232,7 @@ const jk = new Discord.MessageEmbed()
   emerald:0
   })
   .save()
-        
+        */
       }
       
       
@@ -273,7 +256,7 @@ const jk = new Discord.MessageEmbed()
   
   
   /*End Gender*/
-        }else { msg.reply("You already created an account")}
+        }else { msg.reply("⚠️ You already created an account")}
 } 
 
 
