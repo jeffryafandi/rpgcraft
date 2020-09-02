@@ -14,15 +14,17 @@ module.exports.run = async (client, msg, args) => {
   async function createCanvas() {
     const { body: image } =
     await client.snek.get("https://cdn.discordapp.com/attachments/750513633854881814/750513805951369246/1598977255905-picsay.png");
+    let skin;
     if (db.skin === "steve"){
-    const { body: skin } = await client.snek.get("https://cdn.discordapp.com/attachments/750513633854881814/750513805599178802/unnamed.png");
-    }else{
-      const { body: skin } = await client.snek.get("https://cdn.discordapp.com/attachments/750513633854881814/750513805766819871/unnamed_1.png")
+    skin = await client.snek.get("https://cdn.discordapp.com/attachments/750513633854881814/750513805599178802/unnamed.png");
+    }else if(db.skin === "alex") {
+      
+      skin = await client.snek.get("https://cdn.discordapp.com/attachments/750513633854881814/750513805766819871/unnamed_1.png")
     }
 
     return new Canvas(543, 337)
       .addImage(image, 0, 0, 543, 337)
-      .addImage(skin, 0, 0, 
+      .addImage(skin.body, 0, 0, 70, 180)
       .toBufferAsync();
   }
   msg.channel.send({
