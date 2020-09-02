@@ -1,18 +1,17 @@
 
 const Discord = require('discord.js')
-const players = require ('../../models/player.js')
+const Player = require ('../../models/player.js')
 const mongoose = require ('mongoose')
 
 module.exports.run = async (client,msg,args) => {
  
-  const pl = await players.findOne({
-    id: msg.author.id
-  })
-  
-  if(pl.ac = null) {
-    return msg.reply(`⚠️ You have created an account, you cannot create it again!`)
-    
-  }
+  const db = await Player.findOne(
+      {
+        id: msg.author.id
+      })
+        if (!db) {
+        
+        
   
   //Cek model deh abis ini ;v @Angga <<<<<<<<<<<<<<<
   //Var
@@ -21,7 +20,7 @@ module.exports.run = async (client,msg,args) => {
   
   const tag = `**${msg.author.tag}**`
   
-  
+  //OwO
   //Filter
   const filter = m => {
     if(m.author.id === msg.author.id) return true
@@ -192,8 +191,39 @@ const jk = new Discord.MessageEmbed()
 ///return true
     } else if(yu === "yes") {
     
-      if(!pl) {
-        const ply = await players.create({
+      if(!db) {
+        const newPlayer = new Player({
+            _id: mongoose.Types.ObjectId(),
+            id: message.author.id,
+            guild: message.guild.id,
+            blacklist: false,
+            bank: "0",
+            coins: "0",
+            gems: "0",
+            area: "1",
+            unlock: "1",
+            level: "0",
+            mhp: "100",
+            hp: "100",
+            xp: "10",
+            mxp: "320",
+            title: "Just a player",
+            attack: "0",
+            defense: "0",
+            common: "0",
+            uncommon: "0",
+            rare: "0",
+            epic: "0",
+            legend: "0",
+            log: "0"
+          });
+
+          newPlayer
+            .save()
+            .then(result => console.log(result))
+            .catch(err => console.error(err));
+        /*
+        const ply = await Player.create({
           ac: true,
          id: msg.author.id,
   nickname: data[0],
@@ -243,7 +273,8 @@ const jk = new Discord.MessageEmbed()
   
   
   /*End Gender*/
-}
+        }else { msg.reply("You already created an account")}
+} 
 
 
 module.exports.help = {
