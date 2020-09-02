@@ -9,7 +9,12 @@ module.exports.run = async (client,msg,args) => {
     id: msg.author.id
   })
   
+  if(pl.ac = null) {
+    return msg.reply(`⚠️ You have created an account, you cannot create it again!`)
+    
+  }
   
+  //Cek model deh abis ini ;v @Angga <<<<<<<<<<<<<<<
   //Var
   var mCancel = `You canceled the command`
   var tErr = `Time has run out, please repeat the command again!`
@@ -189,12 +194,32 @@ const jk = new Discord.MessageEmbed()
     
       if(!pl) {
         const ply = await players.create({
+          ac: true,
          id: msg.author.id,
-        nickname: data[0],
-          gender: data[1],
-          character: data[2]
-          
-        })
+  nickname: data[0],
+  gender: data[1],
+  skin: "No Skin",
+  rank: "No",
+  xp: 0,
+  axe: 0,
+  pickaxe: 0,
+  sword: 0,
+  level: 0,
+  head: 0,
+  body: 0,
+  pants: 0,
+  boots: 0,
+  stone: 0,
+  plank: 0,
+  coal: 0,
+  diamond: 0,
+  obsidian: 0,
+  netherite: 0,
+  coal: 0,
+  emerald:0
+  })
+  .save()
+        
       }
       
       
