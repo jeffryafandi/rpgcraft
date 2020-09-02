@@ -1,5 +1,5 @@
-const { Canvas } = require('canvas-constructor')
-module.expotrs.run = async(client, msg, args)=>{
+const { Canvas } = require("canvas-constructor")
+module.exports.run = async(client, msg, args)=>{
 async function createCanvas() {
 const { body: image} = 
       await client.snek.get("https://cdn.discordapp.com/attachments/750513633854881814/750513805951369246/1598977255905-picsay.png") 
