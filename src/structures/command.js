@@ -38,6 +38,7 @@
     cmd = client.commands.get(client.aliases.get(command));
   }
   if (!cmd) return undefined;
+   if(!client.config.ENV.OWNERS.includes(msg.author.id))
   
   cmd.run(client, msg, args)
   
