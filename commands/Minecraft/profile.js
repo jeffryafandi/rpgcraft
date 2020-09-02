@@ -21,8 +21,8 @@ module.exports.run = async(client, msg, args) => {
   const embed = new discord.MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`${user.username}'s Profile`,user.avatarURL({dynamic: true}))
-  .addField("**INFORMATION**", `\n-Name: ${db.name}\n-Gender: ${db.gender}\n-Character: ${db.skim}`)
-  .addField("**STATISTIC**",`${client.config.icon.hp}Hp: ${db.hp}/20\n${client.config.icon.hunger}Stamina: ${db.hunger}\n`)
+  .addField("**INFORMATION**", `\nName: ${db.name}\nGender: ${db.gender}\nCharacter: ${db.skin}`)
+  .addField("**STATISTIC**",`${client.config.icon.hp}Hp: ${db.hp}/20\n${client.config.icon.hunger}Stamina: ${db.hunger}/20\n`)
   .addField("**EQUIPMENT**",`\nSword: ${sword}\nAxe: ${axe}\nPickaxe: ${pickaxe}`)
   msg.channel.send(embed)
 }

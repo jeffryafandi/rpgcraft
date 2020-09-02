@@ -9,8 +9,11 @@
    "RANDOM": "RANDOM" 
   },
   "icon":{
-    "hp":"",
-    "hunger":""
+    "hp":"<:hp:750483139104735282>",
+    "hp1":"<:hp1:750483014655410188>",
+    "hp0":"<:hp0:750484506502234272>",
+    "steak":"<:steak:750483231329091614>",
+    "steak1"
   },
   "start": "Your database has not found, please run `start` to start the game"
   
