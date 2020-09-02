@@ -200,7 +200,7 @@ const jk = new Discord.MessageEmbed()
             skin: data[2],
           hp: 20,
           hunger: 20,
-          area: 1
+          biome: 1
           
      
           });

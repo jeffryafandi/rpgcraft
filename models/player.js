@@ -13,7 +13,7 @@ const PlayerSchema = mongoose.Schema({
   xp: Number,
   level: Number,
   cdarea: Number,
-  area: Number,
+  biome: Number,
   axe: Number,
   pickaxe: Number,
   sword: Number,
