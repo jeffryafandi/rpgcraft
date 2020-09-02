@@ -1,25 +1,35 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, msg, args) => {
 
-  const user = message.author
-  const Player = require("../../models/player.js");
-  message.reply("Answer with \`yes\` to delete all your data from this game **(It cannot be refunded)**")
-  message.channel
-    .awaitMessages(m => m.author.id == message.author.id, { max: 1, time: 30000 })
+  const Player = require("../../models/player.js")
+  const db = await Player.findOne(
+    {
+      id: msg.author.id
+    },
+    (err, gg) => {
+      if (err) console.error(err);
+      if (!gg) {
+        return msg.channel.send(client.config.start)
+      }
+    });
+  
+  msg.reply("Answer with \`yes\` to delete all your data from this game **(It cannot be refunded)**")
+  msg.channel
+    .awaitMessages(m => m.author.id == msg.author.id, { max: 1, time: 30000 })
     .then(collected => {
       if (collected.first().content.toLowerCase() == "yes") {
-        message.reply("Deleting ur database...")
+        msg.reply("Deleting ur database...")
         const mongoose = require('mongoose');
         Player.findOneAndDelete({
-          id: message.author.id
+          id: msg.author.id
         }, (err, res) => {
           if (err) console.error(err)
-          console.log(`${message.author.tag} (${message.author.id}) just Quit the game`);
+          console.log(`${msg.author.tag} (${msg.author.id}) just Quit the game`);
         });
 
-      } else message.reply("Operation canceled.");
+      } else msg.reply("Operation canceled.");
     })
     .catch(() => {
-      message.reply("No answer after 30 seconds, operation canceled.");
+      msg.reply("No answer after 30 seconds, operation canceled.");
     })
 }
 
