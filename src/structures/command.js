@@ -38,7 +38,7 @@
     cmd = client.commands.get(client.aliases.get(command));
   }
   if (!cmd) return undefined;
-   if(!client.config.ENV.OWNERS.includes(msg.author.id))
+   if(!client.config.OWNER_ID.includes(msg.author.id) && cmd.help.module.hide === true) return undefined
   
   cmd.run(client, msg, args)
   
