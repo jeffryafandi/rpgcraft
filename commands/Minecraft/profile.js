@@ -22,7 +22,7 @@ module.exports.run = async(client, msg, args) => {
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`${user.username}'s Profile`,user.avatarURL({dynamic: true}))
   .addField("**INFORMATION**", `\nName: ${db.name}\nGender: ${db.gender}\nCharacter: ${db.skin}`)
-  .addField("**STATISTIC**",`${client.config.icon.hp}Hp: ${db.hp}/20\n${client.config.icon.hunger}Stamina: ${db.hunger}/20\n`)
+  .addField("**STATISTIC**",`${client.config.icon.hp}Hp: ${db.hp}/20\n${client.config.icon.steak}Stamina: ${db.hunger}/20\n`)
   .addField("**EQUIPMENT**",`\nSword: ${sword}\nAxe: ${axe}\nPickaxe: ${pickaxe}`)
   msg.channel.send(embed)
 }
