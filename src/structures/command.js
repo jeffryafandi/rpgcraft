@@ -26,7 +26,7 @@
     );
   const pref = guild.prefix
   
-  const PREFIX = msg.content.startsWith(pref.toLowerCase()) ? pref: `${client.user.toString()} `
+  const PREFIX = msg.content.toLowerCase().startsWith(pref) ? pref: `${client.user.toString()} `
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g)
   const command = args.shift()
   
