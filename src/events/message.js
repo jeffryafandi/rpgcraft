@@ -22,5 +22,9 @@ module.exports = async (client, msg) => {
       }
     );
   if(msg.author.bot || !msg.guild) return;
+  if (msg.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`)))
+      return msg.channel.send(
+        `**My Prefix here is:**\n${settings.prefix}\n${client.user.toString()}`
+      );
   if(msg.content.toLowerCase().startsWith(settings.prefix) || msg.content.startsWith(`${client.user.toString()} `)) return require ('../structures/command')(client, msg)
 }

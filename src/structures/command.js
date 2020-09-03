@@ -29,7 +29,10 @@
   const PREFIX = msg.content.toLowerCase().startsWith(pref) ? pref: `${client.user.toString()} `
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g)
   const command = args.shift()
-  
+  if (msg.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`)))
+      return msg.channel.send(
+        `Hi ${msg.author.username} My Current Prefix Is :\n${pref}\n${client.user.toString()}`
+      );
   let cmd;
   if (client.commands.has(command)) {
     cmd = client.commands.get(command);
