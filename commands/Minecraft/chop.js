@@ -11,7 +11,7 @@ module.exports.run = async (client, msg, args) => {
         return msg.channel.send(client.config.start)
       }
     });
-  if (db.biome === 1 || db.biome === 0) {
+  if (db.biome === "1" || db.biome === "0") {
     let a = 1
     let b = 3
     let axe = "Hand"
@@ -41,7 +41,7 @@ module.exports.run = async (client, msg, args) => {
     let random = Math.floor(Math.random() * b) + a
     let zombie = Math.floor(Math.random() * 100) + 1
 
-    if (zombie < 7) {
+    if (zombie > 7) {
       if (!db.chopcount) {
         await db.updateOne({
           chopcount: 1
@@ -76,6 +76,19 @@ module.exports.run = async (client, msg, args) => {
       if (bb === "zombie") {
         barang = `${client.config.icon.flesh} Rotten Flesh`
         zz = `${client.config.icon.zombie} Zombie`
+        //Jedaa
+        let embed = new discord.MessageEmbed()
+          .setAuthor(`${db.name}'s Fight`, msg.author.displayAvatarURL({ dynamic: true }))
+          .setColor(client.config.COLOR.RANDOM)
+          .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat the Enemy`)
+          .setTimestamp()
+          .setFooter(client.config.footer)
+        msg.channel.send(embed).then(() => {
+          msg.channel.awaitMessages(filter, { max: 1, time: client.config.time.zombie, errors: ['time'] })
+            .then(collected => {
+              msg.reply(`You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`);
+            })
+            .catch(collected, async () => {
         if (!db.rotten) {
           await db.updateOne({
             rotten: ritem
@@ -84,10 +97,23 @@ module.exports.run = async (client, msg, args) => {
           await db.updateOne({
             rotten: db.rotten + ritem
           })
-        }
+        }})})
       } else if (bb === "creeper") {
         barang = `${client.config.icon.gunpowder} Gunpowder`
         zz = `${client.config.icon.creeper} Creeper`
+        //Jeda
+        let embed = new discord.MessageEmbed()
+          .setAuthor(`${db.name}'s Fight`, msg.author.displayAvatarURL({ dynamic: true }))
+          .setColor(client.config.COLOR.RANDOM)
+          .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat the Enemy`)
+          .setTimestamp()
+          .setFooter(client.config.footer)
+        msg.channel.send(embed).then(() => {
+              msg.channel.awaitMessages(filter, { max: 1, time: client.config.time.zombie, errors: ['time'] })
+                .then(collected => {
+                  msg.reply(`You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`);
+                })
+                .catch(async(collected)  => {
         if (!db.gunpowder) {
           await db.updateOne({
             gunpowder: ritem
@@ -96,10 +122,23 @@ module.exports.run = async (client, msg, args) => {
           await db.updateOne({
             gunpowder: db.gunpowder + ritem
           })
-        }
+        }})})
       }else if (bb === "skeleton") {
         barang = `${client.config.icon.bone} Bone`
         zz = `${client.config.icon.skeleton} Skeleton`
+        //Jedaaa
+        let embed = new discord.MessageEmbed()
+          .setAuthor(`${db.name}'s Fight`, msg.author.displayAvatarURL({ dynamic: true }))
+          .setColor(client.config.COLOR.RANDOM)
+          .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat the Enemy`)
+          .setTimestamp()
+          .setFooter(client.config.footer)
+        msg.channel.send(embed).then(() => {
+              msg.channel.awaitMessages(filter, { max: 1, time: client.config.time.zombie, errors: ['time'] })
+                .then(collected => {
+                  msg.reply(`You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`);
+                })
+                .catch(async(collected)=> {
         if (!db.bone) {
           await db.updateOne({
             bone: ritem
@@ -108,10 +147,23 @@ module.exports.run = async (client, msg, args) => {
           await db.updateOne({
             bone: db.bone + ritem
           })
-        }
+        }})})
       }else if (bb === "spider") {
         barang = `${client.config.icon.string} String`
         zz = `${client.config.icon.spider} Spider`
+        //Jedaa
+        let embed = new discord.MessageEmbed()
+          .setAuthor(`${db.name}'s Fight`, msg.author.displayAvatarURL({ dynamic: true }))
+          .setColor(client.config.COLOR.RANDOM)
+          .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat the Enemy`)
+          .setTimestamp()
+          .setFooter(client.config.footer)
+        msg.channel.send(embed).then(() => {
+              msg.channel.awaitMessages(filter, { max: 1, time: client.config.time.zombie, errors: ['time'] })
+                .then(collected => {
+                  msg.reply(`You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`);
+                })
+                .catch(async(collected) => {
         if (!db.bone) {
           await db.updateOne({
             bone: ritem
@@ -120,23 +172,8 @@ module.exports.run = async (client, msg, args) => {
           await db.updateOne({
             bone: db.bone + ritem
           })
-        }
+        }})})
       }
-      let embed = new discord.MessageEmbed()
-        .setAuthor(`${db.name}'s Fight`, msg.author.displayAvatarURL({dynamic: true}))
-        .setColor(client.config.COLOR.RANDOM)
-        .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat ${zz}\n${item.question}`)
-        .setTimestamp()
-        .setFooter(client.config.footer)
-      msg.channel.send(embed).then(() => {
-        msg.channel.awaitMessages(filter, { max: 1, time: client.config.time.zombie, errors: ['time'] })
-          .then(collected => {
-            msg.reply(`You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`);
-          })
-          .catch(collected => {
-            msg.reply(`Aww you afk and killed by: ${zz}`);
-          });
-      });
     }
   } else msg.reply("You need to change the `biome` to `forest` or change to `premium` biomes")
 
