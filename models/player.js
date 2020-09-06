@@ -22,6 +22,7 @@ const PlayerSchema = mongoose.Schema({
   pvpcount: Number,
   fightcount: Number,
   craftcount: Number,
+  rotten: String,
   armor: Number,
   stone: Number,
   dirt: Number,
