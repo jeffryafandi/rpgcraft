@@ -11,7 +11,7 @@ module.exports.run = async (client, msg, args) => {
         return msg.channel.send(client.config.start)
       }
     });
-  if (db.biome === "1" || db.biome === "0") {
+  if (db.biome === 1 || db.biome === 0) {
     let a = 1
     let b = 3
     let axe = "Hand"
@@ -41,7 +41,7 @@ module.exports.run = async (client, msg, args) => {
     let random = Math.floor(Math.random() * b) + a
     let zombie = Math.floor(Math.random() * 100) + 1
 
-    if (zombie > 7) {
+    if (zombie < 7) {
       if (!db.chopcount) {
         await db.updateOne({
           chopcount: 1
@@ -80,7 +80,7 @@ module.exports.run = async (client, msg, args) => {
         let embed = new discord.MessageEmbed()
           .setAuthor(`${db.name}'s Fight`, msg.author.displayAvatarURL({ dynamic: true }))
           .setColor(client.config.COLOR.RANDOM)
-          .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat the Enemy`)
+          .setDescription(`**Attacked by:** ${zz}\nAnswer the question to Defeat the Enemy\n${item.question}`)
           .setTimestamp()
           .setFooter(client.config.footer)
         msg.channel.send(embed).then(() => {
@@ -88,7 +88,7 @@ module.exports.run = async (client, msg, args) => {
             .then(collected => {
               msg.reply(`You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`);
             })
-            .catch(collected, async () => {
+            .catch(async (collected) => {
         if (!db.rotten) {
           await db.updateOne({
             rotten: ritem
