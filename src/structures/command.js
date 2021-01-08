@@ -40,5 +40,4 @@
    if(!client.config.ENV.OWNER_ID.includes(msg.author.id) && cmd.help.module.hide === true) return undefined
   
   cmd.run(client, msg, args)
-  
 }
