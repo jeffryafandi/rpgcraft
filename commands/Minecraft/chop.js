@@ -1,77 +1,116 @@
 const discord = require("discord.js");
 module.exports.run = async (client, msg, args) => {
   const Player = require("../../models/player.js");
-  const db = await Player.findOne(
-    {
-      id: msg.author.id
-    },
-    (err, gg) => {
-      if (err) console.error(err);
-      if (!gg) {
-        return msg.channel.send(client.config.start);
-      }
-    }
-  );
-  if (db.biome === 1 || db.biome === 0) {
-    let a = 1;
-    let b = 3;
+  const mongoose = require("mongoose");
+  client.util.player(msg.author.id).then(async db => {
+    if (!db) return msg.channel.send(client.config.start);
+    client.util.client(client.user.id).then(async(cln)=>{
+    if (db.cd !== null && cln.cooldown - (Date.now() - db.cd) > 0)return msg.reply(`Cooldown, please try again on ${require("pretty-ms")(cln.cooldown - (Date.now() - db.cd))}`)
+    let a = (db.axe || 0) * 2 + 1
+    let b = (db.axe || 0) * 4 + 3
     let axe = "Hand";
-    if (db.axe === 1) {
-      axe = `${client.db.icon.axe1} Wooden Axe`;
-      b = 6;
-    }
-    if (db.axe === 2) {
-      axe = `${client.db.icon.axe2} Iron Axe`;
-      b = 9;
-    }
-    if (db.axe === 3) {
-      axe = `${client.db.icon.axe3} Golden Axe`;
-      a = 3;
-      b = 13;
-    }
-    if (db.axe === 4) {
-      axe = `${client.db.icon.axe4} Diamond Axe`;
-      a = 8;
-      b = 21;
-    }
-    if (db.axe === 5) {
-      axe = `${client.db.icon.axe5} Netherite Axe`;
-      a = 10;
-      b = 35;
-    }
-    let random = Math.floor(Math.random() * b) + a;
-    let zombie = Math.floor(Math.random() * 100) + 1;
-
-    if (zombie < 7) {
-      if (!db.chopcount) {
-        await db.updateOne({
-          chopcount: 1
-        });
+    let log = Math.floor(Math.random() * b) + a
+    if (!db.axe || db.axe === 0) {
+      msg.reply(
+        `You Chopped tree with your **Hand** and got ${log} ${client.config.icon.log}`
+      );
+      if (!db.log) {
+        await db.updateOne({ log: log });
       } else {
-        await db.updateOne({
-          chopcount: db.chopcount + 1
-        });
+        await db.updateOne({ log: db.log + log });
       }
+    } else if (db.axe === 1) {
+      msg.reply(
+        `You Chopped tree with ${client.config.icon.axe1} Wooden Axe and got ${log} ${client.config.icon.log}`
+      );
       if (!db.log) {
         await db.updateOne({
-          log: random
+          log: log
         });
       } else {
         await db.updateOne({
-          log: db.log + random
+          log: db.log + log
         });
       }
-      msg.reply(
-        `You chop the tree with your ${axe} And got ${random} ${client.config.icon.log}`
-      );
+    } else if (db.axe === 2) {
+      axe = `${client.config.icon.axe2} Stone Axe`;
+      b = 9;
+      if (!db.log) {
+        await db.updateOne({
+          log: log
+        });
+      } else {
+        await db.updateOne({
+          log: db.log + log
+        });
+      }
+    } else if (db.pickaxe === 3) {
+      axe = `${client.config.icon.pickaxe3} Golden Pickaxe`;
+      a = 3;
+      b = 13;
+      if (!db.log) {
+        await db.updateOne({
+          log: log
+        });
+      } else {
+        await db.updateOne({
+          log: db.log + log
+        });
+      }
+    } else if (db.pickaxe === 4) {
+      axe = `${client.config.icon.pickaxe4} Diamond Pickaxe`;
+      a = 8;
+      b = 21;
+      if (!db.log) {
+        await db.updateOne({
+          log: log
+        });
+      } else {
+        await db.updateOne({
+          stone: db.log + log
+        });
+      }
+    } else if (db.pickaxe === 5) {
+      axe = `${client.config.icon.pickaxe5} Netherite Pickaxe`;
+      a = 10;
+      b = 35;
+      if (!db.log) {
+        await db.updateOne({
+          log: log
+        });
+      } else {
+        await db.updateOne({
+          log: db.log + log
+        });
+      }
+    }
+    if (!db.chopcount) {
+      await db.updateOne({
+        chopcount: 1
+      });
     } else {
+      await db.updateOne({
+        chopcount: db.chopcount + 1
+      });
+    }
+    await db.updateOne({ cd: Date.now() });
+    let zombie = Math.floor(Math.random() * 101) + 0;
+    if (zombie < cln.monster) {
       let zz;
       let barang;
-      let rdm = ["zombie", "creeper", "skeleton", "spider"];
+      let rdm = [
+        "zombie",
+        "zombie",
+        "zombie",
+        "creeper",
+        "skeleton",
+        "skeleton",
+        "spider"
+      ];
       let bb = rdm[Math.floor(Math.random() * rdm.length)];
       let ritem = Math.floor(Math.random() * 3) + 1;
       if (bb === "zombie") {
-        barang = `${client.config.icon.flesh} Rotten Flesh`;
+        barang = `${client.config.icon.rotten} Rotten Flesh`;
         zz = `${client.config.icon.zombie} Zombie`;
         const quiz = require("../../src/quiz/zombie.json");
         const item = quiz[Math.floor(Math.random() * quiz.length)];
@@ -114,7 +153,12 @@ module.exports.run = async (client, msg, args) => {
                 });
               }
             })
-            .catch(async collected => {});
+            .catch(async collected => {
+              await db.updateOne({
+                hp: db.hp - db.hp
+              });
+              msg.reply(`You afk while Mining and killed by ${zz}`);
+            });
         });
       } else if (bb === "creeper") {
         barang = `${client.config.icon.gunpowder} Gunpowder`;
@@ -160,7 +204,12 @@ module.exports.run = async (client, msg, args) => {
                 });
               }
             })
-            .catch(async collected => {});
+            .catch(async collected => {
+              await db.updateOne({
+                hp: db.hp - db.hp
+              });
+              msg.reply(`You afk while Mining and killed by ${zz}`);
+            });
         });
       } else if (bb === "skeleton") {
         barang = `${client.config.icon.bone} Bone`;
@@ -207,7 +256,12 @@ module.exports.run = async (client, msg, args) => {
                 });
               }
             })
-            .catch(async collected => {});
+            .catch(async collected => {
+              await db.updateOne({
+                hp: db.hp - db.hp
+              });
+              msg.reply(`You afk while Mining and killed by ${zz}`);
+            });
         });
       } else if (bb === "spider") {
         barang = `${client.config.icon.string} String`;
@@ -243,27 +297,30 @@ module.exports.run = async (client, msg, args) => {
               msg.reply(
                 `You killed a ${zz} with your ${axe} and got ${ritem} ${barang}`
               );
-              if (!db.bone) {
+              if (!db.string) {
                 await db.updateOne({
-                  bone: ritem
+                  string: ritem
                 });
               } else {
                 await db.updateOne({
-                  bone: db.bone + ritem
+                  string: db.string + ritem
                 });
               }
             })
-            .catch(async collected => {});
+            .catch(async collected => {
+              await db.updateOne({
+                hp: db.hp - db.hp
+              });
+              msg.reply(`You afk while Mining and killed by ${zz}`);
+            });
         });
       }
     }
-  } else
-    msg.reply(
-      "You need to change the `biome` to `forest` or change to `premium` biomes"
-    );
+  });
+  });
 };
 
 module.exports.help = {
   name: "chop",
-  aliases: []
+  aliases: ["chopping"]
 };

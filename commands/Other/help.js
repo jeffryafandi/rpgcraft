@@ -8,7 +8,9 @@ module.exports.run = async (client,msg,args) => {
   const embee = new MessageEmbed()
   .setColor(client.config.COLOR.RANDOM)
   .setAuthor(`Help Commands ${client.user.username}`, client.user.avatarURL())
-  .setDescription(`Support Server: https://discord.gg/ayam`)
+  .setDescription(`Support Server: https://discord.gg/3RQcJk8`)
+  .setFooter(client.config.footer)
+  .setTimestamp()
   for(const mod of help) {
    embee.addField(`${mod.name}`, mod.cmds.map(x => `\`${x}\``).join(", ")) //sue jangan
   }
@@ -17,7 +19,7 @@ module.exports.run = async (client,msg,args) => {
 
 module.exports.help = {
   name: "help",
-  aliases: ['h', 'cmd']
+  aliases: ['h', 'cmd', "commands"]
 }
   
   

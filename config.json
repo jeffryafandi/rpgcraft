@@ -2,9 +2,10 @@
   
   "PREFIX": "mc!",
   "ENV": {
-  "TOKEN": "NzUwMTM0NzYzNjQ5NjMwMjI4.X02HcA.azuPf_UItor0hMgD_fGrcE6OKls",
-    "OWNER_ID": ["679652448058867753", "574783649296416771"]
+  "TOKEN": "NzUwMTM0NzYzNjQ5NjMwMjI4.X02HcA.wLtmjGo4v2ipQ8kVxPaQ_NNNFdc",
+    "OWNER_ID": ["679652448058867753", "574783649296416771", "680338972295299105","588371934279106560"]
   },
+  "footer":"RPG CRAFT | Alpla v0.0.1",
   "time":{
     "zombie": 30000
   },
@@ -13,13 +14,39 @@
   },
   "icon":{
     "hp":"<:hp:750483139104735282>",
-    "hp1":"<:hp1:750483014655410188>",
-    "hp0":"<:hp0:750484506502234272>",
-    "steak":"<:steak:750483231329091614>",
-    "steak1":"<:steak1:750482865237786644>",
-    "steak0":"<:steak0:750482705786863717>"
+    "steak":"<:stamina:751254822849740900>",
+    "xp_1":"<:xp_1:757510233110085642>",
+    "xp_2":"<:xp_2:757510476618924102>",
+    "xp_3":"<:xp_3:757510306040643654>",
+    "coin": "<:coin:751274249993322558>",
+    "emerald": "<:emerald:751289759175016458>",
+    "iron":"<:iron_ingot:753028454932414524>",
+    "gold":"<:gold_ingot:753028737393754197>",
+    "diamond":"<:emoji_5:751287179283660803>",
+    "steve": "<:steve:752739586387607552>",
+    "alex":"<:alex:752739319076225076>",
+    "creeper":"<:mob_creeper:751279635915866153>",
+    "zombie":"<:mob_zombie:751278646798450779>",
+    "spider":"<:mob_spider:751290378656940063>",
+    "skeleton":"<:mob_skeleton:751279170054520842>",
+    "log":"<:i_log:753032229533515807>",
+    "stick":"<:i_stick:754611028670546001>",
+    "stone":"<:i_stone:756499201420034070>",
+    "coal":"<:i_coal:753028347734523954>",
+    "ironore":"<:i_iron_ore:758246422431793173>",
+    "goldore":"<:gold_ore:753028631843962990>",
+    "bone":"<:i_bone:753032326426001469>",
+    "rotten":"<:i_rottenflesh:753032263750647978>",
+    "string":"<:i_string:756502104469667994>",
+    "gunpowder":"<:i_gunpowder:753032289205616813>",
+    "pickaxe1": "<:wooden_pickaxe:755777324892291072>",
+    "pickaxe2": "<:stone_pickaxe:755777471575490652>",
+    "pickaxe3":"<:iron_pickaxe:755777541322833990>",
+    "pickaxe4":"<:golden_pickaxe:755777626127335504>",
+    "pickaxe5":"<:diamond_pickaxe:755777702635503676>",
+    "pickaxe6":"<:netherite_pickaxe:755777743681224774>"
   },
-  "start": "Your database has not found, please run `start` to start the game"
+  "start": "User database has not found, please run `start` to start the game"
   
   
   

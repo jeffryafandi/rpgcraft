@@ -17,7 +17,7 @@ module.exports.run = async (client, msg, args) => {
     .awaitMessages(m => m.author.id == msg.author.id, { max: 1, time: 30000 })
     .then(collected => {
       if (collected.first().content.toLowerCase() == "yes") {
-        msg.reply("Deleting ur database...")
+        msg.reply("Success Deleting your database..")
         const mongoose = require('mongoose');
         Player.findOneAndDelete({
           id: msg.author.id
@@ -25,8 +25,10 @@ module.exports.run = async (client, msg, args) => {
           if (err) console.error(err)
           console.log(`${msg.author.tag} (${msg.author.id}) just Quit the game`);
         });
-
-      } else msg.reply("Operation canceled.");
+       client.util.client(client.user.id).then(async(m)=>{
+         await m.updateOne({player: m.player - 1})
+       })
+      } else msg.channel.send("Operation canceled.");
     })
     .catch(() => {
       msg.reply("No answer after 30 seconds, operation canceled.");
